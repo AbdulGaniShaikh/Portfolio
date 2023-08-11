@@ -1,5 +1,5 @@
 import React from "react";
-import me from '../../assets/img/me.jpg'
+import me from '../../assets/img/user.png'
 import resume from '../../assets/pdf/resume.pdf'
 
 
