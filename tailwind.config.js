@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primaryColor: '#6834f6'
+        primaryColor: '#6834f6',
+        navBg: '#FFFFFFF0'
       },
       size: {
         70: '284px'
