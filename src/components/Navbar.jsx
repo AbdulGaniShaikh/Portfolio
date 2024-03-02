@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const navData = [
   {
@@ -25,16 +25,30 @@ const Navbar = () => {
   const [navVisible, setNavVisible] = useState(false);
   const onClick = () => {
     if (!navVisible) {
-      navbar.current.classList.remove('left-full');
+      while (navbar.current.classList.contains('left-full')) {
+        navbar.current.classList.remove('left-full');
+      }
       navbar.current.classList.add('left-0');
       hamburger.current.classList.add('change');
+      navbar.current.style.visibility = 'visible';
     } else {
       navbar.current.classList.add('left-full');
-      navbar.current.classList.remove('left-0');
-      hamburger.current.classList.remove('change');
+      while (navbar.current.classList.contains('left-0')) {
+        navbar.current.classList.remove('left-0');
+      }
+      while (hamburger.current.classList.contains('change')) {
+        hamburger.current.classList.remove('change');
+      }
+      navbar.current.style.visibility = 'hidden';
     }
     setNavVisible(!navVisible);
   };
+
+  useEffect(() => {
+    if (!navVisible) {
+      navbar.current.style.visibility = 'hidden';
+    }
+  }, [navVisible]);
   return (
     <nav className="z-20 fixed top-0 left-0 w-full py-5 lg:px-52 backdrop-blur-sm">
       <div className="flex px-5 justify-between items-center ">
@@ -47,6 +61,7 @@ const Navbar = () => {
 
         <div
           ref={navbar}
+          id="navbar"
           className="z-10 max-sm:fixed max-sm:bg-navBg max-sm:text-2xl top-0 bottom-0 left-full right-0 max-sm:h-screen max-sm:w-full justify-self-end ease-in-out duration-300"
         >
           <div className="flex h-full w-full flex-row max-sm:flex-col gap-10 items-center justify-center">
